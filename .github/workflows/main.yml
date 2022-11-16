@@ -32,10 +32,20 @@ jobs:
         with:
           python-version: '3.9'
           cache: 'pip'
-          
+
+      - id: aws
+      - uses: actions/checkout@v2
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-1
+
       - run: | 
               pip install ipynb-py-convert
               ipynb-py-convert archivo_ejemplo_01.ipynb archivo_ejemplo_01.py
+              aws s3 cp archivo_ejemplo_01.py s3://tarroloco/pythonf/
 
  # Add new files in folder, commit along with other modified files, push
       - id: commit
