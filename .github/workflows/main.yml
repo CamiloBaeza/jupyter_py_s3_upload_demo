@@ -17,7 +17,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - id: repo
         name: Repo Checkout
         uses: actions/checkout@v2
@@ -62,16 +61,16 @@ jobs:
     needs: convert_file
     steps:
 
-      - id: repo2
-        name: Repo Checkout2
-        uses: actions/checkout@v2 
+    - id: repo2
+      name: Repo Checkout2
+      uses: actions/checkout@v2 
 
-     - id: aws
-        name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-west-1
+    - id: aws
+      name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-west-1
      
      - run: aws s3 cp archivo_ejemplo_01.py s3://tarroloco/pythonf/
