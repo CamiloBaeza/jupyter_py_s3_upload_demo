@@ -56,7 +56,7 @@ jobs:
   upload_s3:
 
     runs-on: ubuntu-latest
-
+    needs: convert_jup_to_py
     steps:
 
       - id: repo2
